@@ -18,7 +18,7 @@ Proyek ini bertujuan untuk:
 ---
 
 ## ⚙️ Teknologi yang Digunakan
-- Laravel (Framework PHP)
+- Laravel 12 (Framework PHP)
 - PHP
 - MySQL / MariaDB
 - Composer
@@ -94,7 +94,35 @@ routes/
 
 --- 
 
+## ## 🚀 Cara Instalasi
+1. Clone repository
+```bash
+git clone https://github.com/faharni077-sys/barang-app.git
+
+2. Masuk folder project
+cd nama-repository
+
+3.instal dependency
+composer install
+
+4. Setup environment
+cp .env.example .env
+
+5. Atur database di .env
+6. Generate key
+php artisan key:generate
+
+7. Migrasi database
+php artisan migrate
+
+8. Jalankan serve
+php artisan serve
+
+9. Buka di browser
+http://127.0.0.1:8000
+
 
 ## 👨‍💻 Author
 Riezky Maharani
 Mahasiswa Sistem Informasi
+nim : 240180110
