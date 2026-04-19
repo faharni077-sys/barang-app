@@ -15,15 +15,17 @@
 <div class="box">
 <h3>Tambah Barang</h3>
 
-<form method="POST" action="/barang">
+<form method="POST" action="{{ route('barang.store') }}">
     @csrf
+
     <input type="text" name="nama_barang" placeholder="Nama Barang">
     <input type="number" name="harga" placeholder="Harga">
     <input type="number" name="stok" placeholder="Stok">
+
     <button>Simpan</button>
 </form>
 
-<a href="/barang">← Kembali</a>
+<a href="{{ route('barang.index') }}">← Kembali</a>
 </div>
 
 </body>

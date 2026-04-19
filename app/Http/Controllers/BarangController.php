@@ -3,62 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Barang;
 
 class BarangController extends Controller
 {
-    public function store(Request $request)
-    { 
-    \App\Models\Barang::create([
-        'nama_barang' => $request->nama_barang,
-        'harga' => $request->harga,
-        'stok' => $request->stok,
-    ]);
-
-    return redirect('/barang')->with('success', 'Data berhasil disimpan!');
-    }
-    
     public function index()
     {
-        $data = \App\Models\Barang::all();
-        return view('barang.index', compact('data'));
+        $barang = Barang::all();
+        return view('barang.index', compact('barang'));
+    }
 
-        foreach($data as $d){
-             echo $d->id . " - " . $d->nama_barang . " _ " . $d->harga. " - " . $d->stok . "<br>";
-        }
+    public function create()
+    {
+        return view('barang.create');
+    }
 
-        if($data->isEmpty()){
-            echo "Data masih kosong!";
-        }
+    public function store(Request $request)
+    {
+        Barang::create($request->all());
+        return redirect()->route('barang.index')->with('success', 'Data berhasil disimpan!');
+    }
+
+    public function edit($id)
+    {
+        $barang = Barang::findOrFail($id);
+        return view('barang.edit', compact('barang'));
     }
 
     public function update(Request $request, $id)
     {
-        $data = \App\Models\Barang::find($id);
-
-        if(!$data){
-            return "Data tidak ditemukan!";
-        }
-
-        $data->update([
-            'nama_barang' => $request->nama_barang,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-        ]);
-        return redirect('/barang')->with('success', 'Data berhasil diupdate!');
+        Barang::findOrFail($id)->update($request->all());
+        return redirect()->route('barang.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        $data = \App\Models\Barang::find($id);
-
-        if(!$data){
-        return "Data tidak ditemukan!";
-        }
-
-        $data->delete();
-
-        return redirect('/barang')->with('success', 'Data berhasil dihapus!');
+        Barang::destroy($id);
+        return redirect()->route('barang.index')->with('success', 'Data berhasil dihapus!');
     }
-
 }
-

@@ -8,13 +8,12 @@
     th { background: #eee; }
     a { margin: 0 5px; }
     </style>
-
 </head>
 <body>
 
 <h2>Data Barang</h2>
 
-<a href="/form">+ Tambah Data</a>
+<a href="{{ route('barang.create') }}">+ Tambah Data</a>
 <br><br>
 
 @if(session('success'))
@@ -30,15 +29,20 @@
         <th>Aksi</th>
     </tr>
 
-    @foreach($data as $d)
+    @foreach($barang as $b)
     <tr>
-        <td>{{ $d->id }}</td>
-        <td>{{ $d->nama_barang }}</td>
-        <td>{{ $d->harga }}</td>
-        <td>{{ $d->stok }}</td>
+        <td>{{ $b->id }}</td>
+        <td>{{ $b->nama_barang }}</td>
+        <td>{{ $b->harga }}</td>
+        <td>{{ $b->stok }}</td>
         <td>
-            <a href="/edit/{{ $d->id }}">Edit</a>
-            <a href="/delete/{{ $d->id }}">Hapus</a>
+            <a href="{{ route('barang.edit', $b->id) }}">Edit</a>
+
+            <form action="{{ route('barang.destroy', $b->id) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button>Hapus</button>
+            </form>
         </td>
     </tr>
     @endforeach

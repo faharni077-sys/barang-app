@@ -14,15 +14,18 @@
 <div class="box">
 <h3>Edit Barang</h3>
 
-<form method="POST" action="/update/{{ $data->id }}">
+<form method="POST" action="{{ route('barang.update', $barang->id) }}">
     @csrf
-    <input type="text" name="nama_barang" value="{{ $data->nama_barang }}">
-    <input type="number" name="harga" value="{{ $data->harga }}">
-    <input type="number" name="stok" value="{{ $data->stok }}">
+    @method('PUT')
+
+    <input type="text" name="nama_barang" value="{{ $barang->nama_barang }}">
+    <input type="number" name="harga" value="{{ $barang->harga }}">
+    <input type="number" name="stok" value="{{ $barang->stok }}">
+    
     <button>Update</button>
 </form>
 
-<a href="/barang">← Kembali</a>
+<a href="{{ route('barang.index') }}">← Kembali</a>
 </div>
 
 </body>
